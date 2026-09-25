@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Desenho — Sarau Literário</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="page-header">
+    <a class="back-link" href="index.html" aria-label="Voltar">&lt;</a>
+    <h1>Desenho</h1>
+  </header>
+  <div id="galeria">
+    <div class="carousel">
+
+        <div class="carousel-track">
+
+            <div class="slide">
+                <img src="apersistenciadamemoriasalvadordali-cke.webp" alt="Imagem 1">
+            </div>
+
+            <div class="slide">
+                <img src="escultura.webp" alt="Imagem 2">
+            </div>
+
+            <div class="slide">
+                <img src="images.jfif" alt="Imagem 3">
+            </div>
+
+        </div>
+
+        <!-- Botões -->
+        <button class="carousel-btn prev">&#10094;</button>
+        <button class="carousel-btn next">&#10095;</button>
+
+        <!-- Indicadores -->
+        <div class="carousel-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+
+    </div>
+
+</div>
+  </div>
+  <main class="form-wrap">
+    <form class="form-card" action="#" method="post" data-sheet="Desenho">
+
+      <div class="form__group field">
+          <label for="nome" class="form__label">Nome</label>
+          <input type="text" id="nome" name="nome" class="form__field" placeholder=" " required>
+      </div>
+
+      <div class="form__group field">
+          <label for="telefone" class="form__label">Telefone</label>
+          <input type="tel" id="telefone" name="telefone" class="form__field" placeholder=" " required>
+      </div>
+
+        <label for="serie">Série:</label>
+      <select class="serie" name="serie">
+          <option value="">6°Ano</option>
+          <option value="">7°Ano</option>
+          <option value="">8°Ano</option>
+          <option value="">9°Ano</option>
+          <option value="">1°Ano</option>
+          <option value="">2°Ano</option>
+          <option value="">3°Ano</option>
+      </select>
+<br>
+        <label for="categoria">categoria:</label>
+      <select class="serie" name="categoria">
+          <option value="">Desenho Fisico</option>
+          <option value="">Desenho Digital</option>
+          <option value="">Escultura</option>
+      </select>
+
+      <!-- From Uiverse.io by csemszepp -->
+      <label for="anexar-arquivo" class="custum-file-upload">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z" fill=""></path> </g></svg>
+        </div>
+        <div class="text">
+          <span id="nome-arquivo">Click to upload image</span>
+        </div>
+        <input id="anexar-arquivo" name="anexar-arquivo" type="file">
+      </label>
+
+      <div class="btn-enviar-wrap">
+        <button type="submit" class="btn-enviar">Enviar</button>
+      </div>
+
+    </form>
+    <div id="popup" class="popup">
+      <div class="popup-conteudo">
+
+        <button id="fecharPopup" class="fechar-popup" type="button">
+          ✕
+        </button>
+
+        <div id="loading" class="spinner"></div>
+
+        <p id="mensagem">Enviando...</p>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    Sarau 2026
+  </footer>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+    const inputArquivo = document.getElementById("anexar-arquivo");
+    const textoArquivo = document.querySelector(".custum-file-upload .text span");
+    const iconeArquivo = document.querySelector(".custum-file-upload .icon");
+
+    inputArquivo.addEventListener("change", function () {
+
+        if (inputArquivo.files.length > 0) {
+
+            // Mostra o nome do arquivo
+            textoArquivo.textContent = inputArquivo.files[0].name;
+
+            // Deixa o ícone verde
+            iconeArquivo.classList.add("arquivo-selecionado");
+
+        } else {
+
+            // Volta ao texto original
+            textoArquivo.textContent = "Click to upload image";
+
+            // Volta o ícone à cor original
+            iconeArquivo.classList.remove("arquivo-selecionado");
+        }
+
+    });
+    const track = document.querySelector(".carousel-track");
+const slides = document.querySelectorAll(".slide");
+
+const prevButton = document.querySelector(".prev");
+const nextButton = document.querySelector(".next");
+
+const dots = document.querySelectorAll(".dot");
+
+let currentSlide = 0;
+
+
+// MOSTRAR SLIDE
+
+function showSlide(index) {
+
+    currentSlide = index;
+
+    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+    // Atualizar indicadores
+
+    dots.forEach(dot => {
+        dot.classList.remove("active");
+    });
+
+    dots[currentSlide].classList.add("active");
+}
+
+
+// BOTÃO PRÓXIMO
+
+nextButton.addEventListener("click", () => {
+
+    currentSlide++;
+
+    if (currentSlide >= slides.length) {
+        currentSlide = 0;
+    }
+
+    showSlide(currentSlide);
+
+});
+
+
+// BOTÃO ANTERIOR
+
+prevButton.addEventListener("click", () => {
+
+    currentSlide--;
+
+    if (currentSlide < 0) {
+        currentSlide = slides.length - 1;
+    }
+
+    showSlide(currentSlide);
+
+});
+
+
+// CLICAR NOS INDICADORES
+
+dots.forEach((dot, index) => {
+
+    dot.addEventListener("click", () => {
+
+        showSlide(index);
+
+    });
+
+});
+
+
+});
+</script>
+  <script src="script.js" defer></script>
+</body>
+</html>
